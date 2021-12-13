@@ -47,6 +47,21 @@ app.delete('/siswa/:id', (req,res) => {
     })
 })
 
+app.put('/siswa/:id', (req,res) => {
+    var id = req.params.id
+    var firstname = req.body.firstname
+    var lastname = req.body.lastname
+    var email = req.body.email
+    var query = "UPDATE siswa SET firstname = '" + firstname + "',lastname = '" + lastname + ", email = '" + email + "'WHERE id =" + id
+    conn.query(query, (err,result) => {
+        if (err)
+        res.json(err)
+        else
+        res.json(result)
+    })
+})
+
+
 http.createServer(app)
 .listen(8000, () =>{
     console.log('server berjalan di port 8000')
