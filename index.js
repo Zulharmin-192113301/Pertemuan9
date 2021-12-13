@@ -26,7 +26,6 @@ app.post('/siswa', (req,res) => {
     var lastname = req.body.lastname
     var email = req.body.email
     var query = "INSERT INTO Siswa (firstname,lastname,email) VALUES ('" + firstname + "','" + lastname + "','" + email + "')"
-    
 
     conn.query(query, (err,result) =>{
         if (err)
@@ -35,6 +34,17 @@ app.post('/siswa', (req,res) => {
         res.json(result)
     })
 
+})
+
+app.delete('/siswa/:id', (req,res) => {
+    var id = req.params.id
+    var query = "DELETE FROM siswa WHERE id = " + id 
+    conn.query(query, (err,result) => {
+        if (err)
+        res.json(err)
+        else
+        res.json(result)
+    })
 })
 
 http.createServer(app)
